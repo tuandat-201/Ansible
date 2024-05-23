@@ -1,0 +1,13 @@
+---
+- name: Lab1
+  hosts: all
+  become: true
+  roles:
+    - user
+
+- name: Lab2
+  hosts: all
+  become: true
+  roles:
+    - dhcp
+    - dns

@@ -1,0 +1,10 @@
+$TTL 86400
+@   IN  SOA     {{ zone['zone_name'] }}. root.{{ zone['zone_name'] }}. (
+        2021022401  ;Serial
+        3600        ;Refresh
+        1800        ;Retry
+        604800      ;Expire
+        86400       ;Minimum TTL
+)
+@ IN  NS      {{ zone['zone_name']}}.
+@ IN  A       {{ zone['ip'] }}

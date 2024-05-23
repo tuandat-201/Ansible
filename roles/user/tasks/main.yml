@@ -1,0 +1,25 @@
+- name: Add User
+  user:
+    name: "{{ username  }}"
+    create_home: true
+
+- name: Disable SSH password authentication
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+  notify: restart ssh
+
+- name: Add SSH Key
+  authorized_key:
+    user: "{{ username }}"
+    key: "{{ lookup('file', '/home/datldt/.ssh/ansible.pub') }}"
+    state: present
+
+- name: Add sudo permission to {{ username }}
+  template:
+    src: sudoers_config.j2
+    dest: /etc/sudoers.d/{{username}}
+    owner: root
+    group: root
+    mode: 0660

@@ -1,0 +1,4 @@
+- name: restart dns service
+  service:
+    name: named
+    state: restarted

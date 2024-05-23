@@ -1,0 +1,33 @@
+---
+- name: Install DNS package
+  package:
+    name: "{{ dns_package }}"
+    state: present
+    update_cache: true
+
+- name: Config DNS - Centos
+  template:
+    src: named.conf.j2
+    dest: /etc/named.conf
+
+- name: Config Forward Zones - CentOS
+  template:
+    src: forward_zone.j2
+    dest: /var/named/forward.{{ zone['zone_name'] }}
+  loop: "{{ zones }}"
+  loop_control:
+    loop_var: zone
+  when: ansible_distribution == "CentOS"
+  notify: restart dns service
+
+- name: Config Reverse Zone - CentOS
+  template:
+    src: reverse_zone.j2
+    dest: /var/named/reverse.{{ zone['zone_name'] }}
+  loop: "{{ zones }}"
+  loop_control:
+    loop_var: zone
+  when: ansible_distribution == "CentOS"
+  notify: restart dns service
+
+...
