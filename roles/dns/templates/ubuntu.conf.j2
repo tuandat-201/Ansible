@@ -1,0 +1,21 @@
+options {
+        directory "/var/cache/bind";
+        allow-query { any; };
+        allow-transfer { localhost; };
+        recursion yes;
+        dnssec-validation auto;
+};
+
+{% for zone in zones %}
+zone "{{ zone['zone_name'] }}" IN {
+        type master;
+        file "/etc/bind/forward.{{ zone['zone_name'] }}";
+        allow-update { none; };
+};
+{% endfor %}
+
+zone "{{ zones[0]['reverse_zone'] }}.in-addr.arpa" IN {
+        type master;
+        file "/etc/bind/reverse.{{ zones[0]['reverse_zone'] }}";
+        allow-update { none; };
+};

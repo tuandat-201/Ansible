@@ -1,10 +1,10 @@
 zones:
   - zone_name: test1.com
-    reverse_zone: 3.2.1
     ip: 1.2.3.4
+    reverse_zone: 3.2.1
     host_add: 4
   
   - zone_name: test2.com
-    reverse_zone: 3.2.1
     ip: 1.2.3.4
-    host_add: 4
+    reverse_zone: 3.2.1
+    host_add: 30

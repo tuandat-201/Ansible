@@ -4,3 +4,5 @@ dhcp_service: dhcpd
 dns_package:
   - bind
   - bind-utils
+
+config_path: /var/named

@@ -8,4 +8,4 @@ $TTL 86400
 )
 @	IN	NS      {{ zone['zone_name'] }}.
 @	IN	A	{{ zone['ip'] }}
-{{ zone['host_add'] }}	IN	{{ zone['zone_name'] }}.
+{{ zone['host_add'] }}	IN	PTR	{{ zone['zone_name'] }}.
